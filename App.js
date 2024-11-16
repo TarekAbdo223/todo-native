@@ -3,6 +3,7 @@ import {
   Button,
   FlatList,
   ScrollView,
+  StatusBar,
   StyleSheet,
   Text,
   TextInput,
@@ -30,25 +31,34 @@ export default function App() {
   }
 
   return (
-    <View style={styles.appContainer}>
-      <Button title="Add New Goal" color="#5e0acc" onPress={startAddGoalItem} />
-      <GoalInput
-        setGoals={setGoals}
-        modalIsVisible={modalIsVisible}
-        onCloseModal={endAddGoalHandler}
-      />
-      <View style={styles.goalsContainer}>
-        <FlatList
-          data={goals}
-          renderItem={(itemData) => {
-            return <GoalItem itemData={itemData} onDeleteInput={deleteGoal} />;
-          }}
-          keyExtractor={(item, index) => {
-            return item.id;
-          }}
+    <>
+      <StatusBar style="light" />
+      <View style={styles.appContainer}>
+        <Button
+          title="Add New Goal"
+          color="#a065ec"
+          onPress={startAddGoalItem}
         />
+        <GoalInput
+          setGoals={setGoals}
+          modalIsVisible={modalIsVisible}
+          onCloseModal={endAddGoalHandler}
+        />
+        <View style={styles.goalsContainer}>
+          <FlatList
+            data={goals}
+            renderItem={(itemData) => {
+              return (
+                <GoalItem itemData={itemData} onDeleteInput={deleteGoal} />
+              );
+            }}
+            keyExtractor={(item, index) => {
+              return item.id;
+            }}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
